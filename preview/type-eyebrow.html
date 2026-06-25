@@ -1,0 +1,28 @@
+<!-- @dsCard group="Type" viewport="700x170" name="Eyebrow labels" subtitle="Uppercase + diamond marker" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:var(--white);}
+  .card{width:700px;box-sizing:border-box;padding:30px 32px;font-family:var(--sans);display:flex;align-items:center;gap:40px;}
+  .demo{display:flex;flex-direction:column;gap:16px;}
+  .eyebrow{font-family:var(--sans);font-weight:700;font-size:12px;line-height:1;letter-spacing:.18em;text-transform:uppercase;color:var(--primary);}
+  .eyebrow.red{color:var(--red-500);}
+  .eyebrow.ink{color:var(--fg3);}
+  .diA{display:inline-block;width:7px;height:7px;background:var(--red-500);transform:rotate(45deg);margin-right:9px;vertical-align:middle;}
+  .meta{font-size:12px;color:var(--fg3);max-width:230px;line-height:1.6;}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="demo">
+    <span class="eyebrow"><span class="diA" style="background:var(--purple-500)"></span>WHO WE ARE</span>
+    <span class="eyebrow red"><span class="diA"></span>THREE STAGES, ONE COMMUNITY</span>
+    <span class="eyebrow ink"><span class="diA" style="background:var(--ink-3)"></span>UPCOMING EVENTS</span>
+  </div>
+  <div class="meta"><b style="color:var(--fg2)">Eyebrow / section label</b><br>Cairo 700 · 12px · UPPERCASE · letter-spacing .18em · paired with a diamond marker.</div>
+</div>
+</body>
+</html>

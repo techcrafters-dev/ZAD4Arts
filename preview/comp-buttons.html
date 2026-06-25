@@ -1,0 +1,33 @@
+<!-- @dsCard group="Components" viewport="700x170" name="Buttons" subtitle="Primary, secondary, ghost, link" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:var(--white);}
+  .card{width:700px;box-sizing:border-box;padding:30px 32px;font-family:var(--sans);display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .btn{font-family:var(--sans);font-weight:600;font-size:15px;border-radius:var(--r-sm);padding:13px 26px;border:1.5px solid transparent;cursor:pointer;transition:all var(--dur) var(--ease-out);}
+  .primary{background:var(--purple-500);color:#fff;}
+  .primary.hover{background:var(--purple-600);box-shadow:var(--shadow-purple);transform:translateY(-1px);}
+  .secondary{background:var(--cream-200);color:var(--fg-on-cream);font-weight:700;}
+  .secondary.hover{background:var(--cream-300);transform:translateY(-1px);box-shadow:var(--shadow-md);}
+  .ghost{background:transparent;color:var(--purple-600);border-color:var(--purple-200);}
+  .ghost.hover{background:var(--purple-50);border-color:var(--purple-300);}
+  .link{background:none;border:0;color:var(--purple-600);font-weight:600;text-decoration:underline;text-underline-offset:4px;cursor:pointer;font-size:15px;font-family:var(--sans);}
+  .st{font-size:10px;color:var(--fg3);position:absolute;margin-top:54px;}
+  .wrap{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;}
+  .cap{font-size:10px;color:var(--fg3);}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="wrap"><button class="btn primary">Become a friend</button><span class="cap">primary · rest</span></div>
+  <div class="wrap"><button class="btn primary hover">Become a friend</button><span class="cap">primary · hover</span></div>
+  <div class="wrap"><button class="btn secondary">Donate</button><span class="cap">secondary · cream</span></div>
+  <div class="wrap"><button class="btn secondary hover">Donate</button><span class="cap">secondary · hover</span></div>
+  <div class="wrap"><button class="btn ghost">Learn more</button><span class="cap">ghost</span></div>
+  <div class="wrap"><button class="link">See what's on →</button><span class="cap">link</span></div>
+</div>
+</body>
+</html>

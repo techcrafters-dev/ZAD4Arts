@@ -1,0 +1,36 @@
+<!-- @dsCard group="Colors" viewport="700x190" name="Text on color" subtitle="Foreground roles per surface" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:var(--white);}
+  .card{width:700px;box-sizing:border-box;padding:26px 30px;font-family:var(--sans);display:flex;gap:14px;}
+  .box{flex:1;border-radius:var(--r-md);padding:16px 18px;min-height:108px;display:flex;flex-direction:column;justify-content:space-between;border:1px solid transparent;}
+  .box .big{font-family:var(--serif-display);font-size:26px;font-weight:600;line-height:1;}
+  .box .sub{font-size:12px;opacity:.85;}
+  .tag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="box" style="background:var(--purple-500);color:#fff">
+    <span class="tag">on purple</span>
+    <div><div class="big">Aa</div><div class="sub">White text · fg-on-purple</div></div>
+  </div>
+  <div class="box" style="background:var(--red-500);color:#fff">
+    <span class="tag">on red</span>
+    <div><div class="big">Aa</div><div class="sub">White text · fg-on-red</div></div>
+  </div>
+  <div class="box" style="background:var(--cream-200);color:var(--fg-on-cream)">
+    <span class="tag" style="color:var(--purple-600)">on cream</span>
+    <div><div class="big">Aa</div><div class="sub">Deep purple · fg-on-cream</div></div>
+  </div>
+  <div class="box" style="background:var(--white);color:var(--fg1);border-color:var(--line)">
+    <span class="tag" style="color:var(--primary)">on white</span>
+    <div><div class="big">Aa</div><div class="sub">Ink + purple accent</div></div>
+  </div>
+</div>
+</body>
+</html>

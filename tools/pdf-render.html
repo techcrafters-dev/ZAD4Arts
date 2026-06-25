@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html,body{margin:0;background:#fff;height:100%;}
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#fff;}
+  canvas{max-width:86vw;max-height:80vh;}
+  .hidden{display:none;}
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+<script>
+const items = [
+  {key:'acs',  url:'acs.pdf'},
+  {key:'gnsf', url:'gnsf.pdf'},
+  {key:'oaf',  url:'oaf.pdf'},
+];
+const stage = document.getElementById('stage');
+window.showLogo = function(i){ [...stage.children].forEach((c,idx)=>c.classList.toggle('hidden', idx!==i)); };
+function trim(src){
+  const ctx=src.getContext('2d');
+  const {data}=ctx.getImageData(0,0,src.width,src.height);
+  let minX=src.width,minY=src.height,maxX=0,maxY=0,found=false;const thr=246;
+  for(let y=0;y<src.height;y++)for(let x=0;x<src.width;x++){const o=(y*src.width+x)*4;if(data[o]<thr||data[o+1]<thr||data[o+2]<thr){found=true;if(x<minX)minX=x;if(x>maxX)maxX=x;if(y<minY)minY=y;if(y>maxY)maxY=y;}}
+  if(!found)return src;
+  const pad=Math.round(Math.max(maxX-minX,maxY-minY)*0.07);
+  minX=Math.max(0,minX-pad);minY=Math.max(0,minY-pad);maxX=Math.min(src.width-1,maxX+pad);maxY=Math.min(src.height-1,maxY+pad);
+  const w=maxX-minX+1,h=maxY-minY+1;const out=document.createElement('canvas');out.width=w;out.height=h;
+  out.getContext('2d').drawImage(src,minX,minY,w,h,0,0,w,h);return out;
+}
+(async function(){
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+  for(const it of items){
+    const pdf = await pdfjsLib.getDocument(it.url).promise;
+    const page = await pdf.getPage(1);
+    const base = page.getViewport({scale:1});
+    const scale = Math.min(6, 1400/base.width);
+    const vp = page.getViewport({scale});
+    const canvas = document.createElement('canvas');
+    canvas.width=Math.ceil(vp.width);canvas.height=Math.ceil(vp.height);
+    const ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);
+    await page.render({canvasContext:ctx, viewport:vp}).promise;
+    const t=trim(canvas);t.classList.add('hidden');stage.appendChild(t);
+  }
+  window.showLogo(0);
+  window.__ready=true;
+})();
+</script>
+</body>
+</html>

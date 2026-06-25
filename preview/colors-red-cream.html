@@ -1,0 +1,40 @@
+<!-- @dsCard group="Colors" viewport="700x230" name="Red & cream scales" subtitle="Secondary + accent ramps" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:var(--white);}
+  .card{width:700px;box-sizing:border-box;padding:26px 30px;font-family:var(--sans);display:flex;flex-direction:column;gap:18px;}
+  .grp .t{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--fg3);margin-bottom:8px;}
+  .scale{display:flex;border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow-sm);}
+  .step{flex:1;height:56px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;}
+  .n{font-size:9.5px;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="grp">
+    <div class="t">Red scale — energy / emphasis</div>
+    <div class="scale">
+      <div class="step" style="background:var(--red-50)"><span class="n" style="color:#A30000">50</span></div>
+      <div class="step" style="background:var(--red-100)"><span class="n" style="color:#A30000">100</span></div>
+      <div class="step" style="background:var(--red-300)"><span class="n" style="color:#fff">300</span></div>
+      <div class="step" style="background:var(--red-500)"><span class="n" style="color:#fff">500</span></div>
+      <div class="step" style="background:var(--red-600)"><span class="n" style="color:#fff">600</span></div>
+      <div class="step" style="background:var(--red-700)"><span class="n" style="color:#fff">700</span></div>
+    </div>
+  </div>
+  <div class="grp">
+    <div class="t">Cream / warm — sparing fields</div>
+    <div class="scale">
+      <div class="step" style="background:var(--cream-50)"><span class="n" style="color:#A0853B">50</span></div>
+      <div class="step" style="background:var(--cream-100)"><span class="n" style="color:#A0853B">100</span></div>
+      <div class="step" style="background:var(--cream-200)"><span class="n" style="color:#7a6322">200</span></div>
+      <div class="step" style="background:var(--cream-300)"><span class="n" style="color:#7a6322">300</span></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

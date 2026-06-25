@@ -1,0 +1,46 @@
+<!-- @dsCard group="Colors" viewport="700x205" name="Core palette" subtitle="Purple › red › cream › black on white" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:var(--white);}
+  .card{width:700px;box-sizing:border-box;padding:26px 30px;font-family:var(--sans);}
+  .row{display:flex;gap:14px;}
+  .sw{flex:1;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-sm);}
+  .chip{height:96px;display:flex;align-items:flex-end;padding:10px 12px;}
+  .meta{padding:9px 12px;background:var(--white);}
+  .name{font-weight:700;font-size:13px;color:var(--fg1);}
+  .role{font-size:11px;color:var(--fg3);}
+  .hex{font-size:11px;color:var(--fg3);font-variant-numeric:tabular-nums;letter-spacing:.02em;}
+  .lbl-light{color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="row">
+    <div class="sw">
+      <div class="chip" style="background:var(--purple-500)"><span class="lbl-light">PRIMARY</span></div>
+      <div class="meta"><div class="name">Purple</div><div class="role">Dominant · brand</div><div class="hex">#8400A9</div></div>
+    </div>
+    <div class="sw">
+      <div class="chip" style="background:var(--red-500)"><span class="lbl-light">SECONDARY</span></div>
+      <div class="meta"><div class="name">Red</div><div class="role">Moderate · energy</div><div class="hex">#FF0000</div></div>
+    </div>
+    <div class="sw">
+      <div class="chip" style="background:var(--cream-200)"></div>
+      <div class="meta"><div class="name">Cream</div><div class="role">Sparing · accent</div><div class="hex">#FFF0C3</div></div>
+    </div>
+    <div class="sw">
+      <div class="chip" style="background:var(--true-black)"><span class="lbl-light">TEXT</span></div>
+      <div class="meta"><div class="name">Black</div><div class="role">Text · logo</div><div class="hex">#111111</div></div>
+    </div>
+    <div class="sw">
+      <div class="chip" style="background:var(--white);border-bottom:1px solid var(--line)"></div>
+      <div class="meta"><div class="name">White</div><div class="role">Canvas · always</div><div class="hex">#FFFFFF</div></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

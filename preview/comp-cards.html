@@ -1,0 +1,33 @@
+<!-- @dsCard group="Components" viewport="700x230" name="Event cards" subtitle="Category card with photo slot" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:var(--bg-warm);}
+  .card{width:700px;box-sizing:border-box;padding:30px 32px;font-family:var(--sans);display:flex;gap:20px;}
+  .ec{flex:1;background:var(--white);border-radius:var(--r-lg);box-shadow:var(--shadow-md);overflow:hidden;border:1px solid var(--line);}
+  .ph{height:104px;background:linear-gradient(135deg,var(--purple-100),var(--purple-200));display:flex;align-items:center;justify-content:center;color:var(--purple-600);font-size:11px;font-weight:600;letter-spacing:.06em;}
+  .ph.red{background:linear-gradient(135deg,var(--red-50),var(--red-100));color:var(--red-600);}
+  .bd{padding:16px 18px;}
+  .tag{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--purple-600);}
+  .di{width:6px;height:6px;background:var(--purple-500);transform:rotate(45deg);}
+  .di.red{background:var(--red-500);}
+  .tt{font-family:var(--serif-display);font-weight:600;font-size:23px;line-height:1.05;color:var(--fg1);margin:9px 0 6px;}
+  .mt{font-size:12px;color:var(--fg3);}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="ec">
+    <div class="ph">PERFORMANCE PHOTO</div>
+    <div class="bd"><span class="tag"><span class="di"></span>THEATER</span><div class="tt">A Night at the National</div><div class="mt">Thu 12 Jun · 8:00 PM · Amman</div></div>
+  </div>
+  <div class="ec">
+    <div class="ph red">PERFORMANCE PHOTO</div>
+    <div class="bd"><span class="tag" style="color:var(--red-600)"><span class="di red"></span>MUSIC</span><div class="tt">Strings of the Levant</div><div class="mt">Sat 21 Jun · 7:30 PM · Irbid</div></div>
+  </div>
+</div>
+</body>
+</html>

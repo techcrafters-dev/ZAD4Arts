@@ -1,0 +1,24 @@
+<!-- @dsCard group="Spacing" viewport="700x180" name="Elevation" subtitle="Soft purple-tinted shadows" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:var(--white);}
+  .card{width:700px;box-sizing:border-box;padding:34px 30px;font-family:var(--sans);display:flex;gap:22px;}
+  .r{flex:1;display:flex;flex-direction:column;align-items:center;gap:12px;}
+  .box{width:100%;height:74px;background:var(--white);border-radius:var(--r-md);}
+  .nm{font-size:11px;color:var(--fg2);font-weight:700;letter-spacing:.04em;}
+  .vl{font-size:10px;color:var(--fg3);}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="r"><div class="box" style="box-shadow:var(--shadow-sm)"></div><span class="nm">sm</span><span class="vl">rest</span></div>
+  <div class="r"><div class="box" style="box-shadow:var(--shadow-md)"></div><span class="nm">md</span><span class="vl">cards</span></div>
+  <div class="r"><div class="box" style="box-shadow:var(--shadow-lg)"></div><span class="nm">lg</span><span class="vl">overlays</span></div>
+  <div class="r"><div class="box" style="box-shadow:var(--shadow-purple);background:var(--purple-500)"></div><span class="nm" style="color:var(--purple-600)">purple</span><span class="vl">primary hover</span></div>
+</div>
+</body>
+</html>

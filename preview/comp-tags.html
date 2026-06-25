@@ -1,0 +1,45 @@
+<!-- @dsCard group="Components" viewport="700x210" name="Tags & diamonds" subtitle="Chips + brand motif" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:var(--white);}
+  .card{width:700px;box-sizing:border-box;padding:28px 32px;font-family:var(--sans);display:flex;flex-direction:column;gap:18px;}
+  .grp{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .pill{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;padding:7px 14px;border-radius:var(--r-pill);}
+  .di{width:7px;height:7px;transform:rotate(45deg);}
+  .p-purple{background:var(--purple-50);color:var(--purple-700);}
+  .p-red{background:var(--red-50);color:var(--red-700);}
+  .p-cream{background:var(--cream-200);color:var(--fg-on-cream);}
+  .p-solid{background:var(--purple-500);color:#fff;}
+  .t{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--fg3);}
+  .diamonds{display:flex;align-items:center;gap:18px;}
+  .ds{transform:rotate(45deg);}
+</style>
+</head>
+<body>
+<div class="card">
+  <div>
+    <div class="t" style="margin-bottom:11px">Category chips / tags</div>
+    <div class="grp">
+      <span class="pill p-purple"><span class="di" style="background:var(--purple-500)"></span>Theater</span>
+      <span class="pill p-red"><span class="di" style="background:var(--red-500)"></span>Music</span>
+      <span class="pill p-cream"><span class="di" style="background:var(--purple-500)"></span>Dance</span>
+      <span class="pill p-solid">Featured</span>
+    </div>
+  </div>
+  <div>
+    <div class="t" style="margin-bottom:13px">Diamond motif — the brand marker</div>
+    <div class="diamonds">
+      <span class="ds" style="width:10px;height:10px;background:var(--red-500)"></span>
+      <span class="ds" style="width:14px;height:14px;background:var(--purple-500)"></span>
+      <span class="ds" style="width:18px;height:18px;background:var(--teal)"></span>
+      <span class="ds" style="width:14px;height:14px;background:var(--true-black)"></span>
+      <span class="ds" style="width:10px;height:10px;border:2px solid var(--purple-400)"></span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

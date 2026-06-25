@@ -1,0 +1,38 @@
+<!-- @dsCard group="Components" viewport="700x180" name="Form inputs" subtitle="Text, focus, select" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:var(--white);}
+  .card{width:700px;box-sizing:border-box;padding:28px 32px;font-family:var(--sans);display:flex;gap:20px;}
+  .col{flex:1;display:flex;flex-direction:column;gap:7px;}
+  label{font-size:12px;font-weight:600;color:var(--fg2);}
+  .inp{font-family:var(--sans);font-size:15px;color:var(--fg1);padding:12px 14px;border:1.5px solid var(--line-strong);border-radius:var(--r-sm);background:var(--white);outline:none;}
+  .inp.focus{border-color:var(--purple-500);box-shadow:0 0 0 3px var(--focus-ring);}
+  .inp.ph{color:var(--fg3);}
+  .hint{font-size:11px;color:var(--fg3);}
+  select.inp{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23837D8C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='4 6 8 10 12 6'/></svg>");background-repeat:no-repeat;background-position:right 12px center;}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="col">
+    <label>Full name</label>
+    <input class="inp" value="Layla Haddad">
+    <span class="hint">Rest state</span>
+  </div>
+  <div class="col">
+    <label>Email</label>
+    <input class="inp focus" value="layla@">
+    <span class="hint" style="color:var(--purple-600)">Focused · purple ring</span>
+  </div>
+  <div class="col">
+    <label>Interest</label>
+    <select class="inp"><option>Theater</option></select>
+    <span class="hint">Select</span>
+  </div>
+</div>
+</body>
+</html>
