@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>زاد الفنون، Zad for Arts</title>
+<meta name="description" content="زاد الفنون، مبادرة ثقافية غير ربحية تدعم الفنون الأدائية في الأردن: المسرح والموسيقى والرقص.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+/* ---------- HOME HERO ---------- */
+.home-media{position:absolute;inset:0;}
+.hslide{position:absolute;inset:0;opacity:0;transition:opacity 1.6s var(--ease);}
+.hslide.active{opacity:1;}
+.hslide img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 8s linear;}
+.hslide.active img{transform:scale(1);}
+.hero-deco.d-1{top:14%;left:8%;width:clamp(120px,16vw,260px);height:clamp(120px,16vw,260px);
+  border:2px solid rgba(255,240,195,.5);transform:rotate(45deg);}
+.hero-deco.d-2{bottom:24%;right:6%;width:18px;height:18px;background:var(--red);transform:rotate(45deg);}
+.hero-deco.d-3{top:30%;right:18%;width:11px;height:11px;background:var(--cream);transform:rotate(45deg);}
+.hero-ctas{display:flex;align-items:center;gap:22px;flex-wrap:wrap;}
+
+/* ---------- WHO WE ARE ---------- */
+.who-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(40px,5.5vw,84px);align-items:center;}
+.who-figure{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:4/5;max-height:680px;}
+.who-media{position:absolute;inset:-10% 0;will-change:transform;}
+.who-media img{width:100%;height:100%;object-fit:cover;}
+.who-figure .curtain{border-radius:14px;}
+.who-figure .tag{position:absolute;bottom:22px;inset-inline-start:22px;z-index:3;display:inline-flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.94);backdrop-filter:blur(8px);color:var(--purple-900);font-weight:700;font-size:14px;
+  padding:11px 18px;border-radius:999px;}
+.who-figure .tag .dmd{background:var(--red);}
+.who-figure{overflow:visible;border-radius:0;aspect-ratio:auto;max-height:none;}
+.who-figure .tag{transition:transform .5s var(--ease);z-index:6;}
+/* ---- photo stack → scatter ---- */
+.who-stack{position:relative;width:100%;aspect-ratio:4/5;max-height:680px;cursor:pointer;}
+.ws-card{position:absolute;top:50%;left:50%;width:66%;background:#fff;padding:9px 9px 30px;border-radius:4px;
+  box-shadow:0 20px 44px -20px rgba(20,4,30,.55);transform-origin:center;z-index:var(--z,1);
+  transform:translate(-50%,-50%) rotate(var(--r,0deg));
+  transition:transform .85s var(--ease),box-shadow .5s var(--ease);}
+.ws-card .ph{width:100%;aspect-ratio:4/5;overflow:hidden;border-radius:2px;background:#1a0822;}
+.ws-card .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease),filter .5s var(--ease);}
+.who-stack.spread .ws-card,.who-stack:hover .ws-card{transform:translate(calc(-50% + var(--sx,0%)),calc(-50% + var(--sy,0%))) rotate(var(--sr,0deg));
+  transition-delay:calc(var(--i,0)*.06s);}
+.who-stack.spread .ws-card:hover,.who-stack:hover .ws-card:hover{
+  transform:translate(calc(-50% + var(--sx,0%)),calc(-50% + var(--sy,0%) - 18px)) rotate(calc(var(--sr,0deg) * 0.2)) scale(1.07);
+  box-shadow:0 42px 84px -26px rgba(20,4,30,.62);z-index:9;
+  transition:transform .6s cubic-bezier(0.16,1,0.3,1),box-shadow .6s var(--ease);}
+.who-stack.spread .ws-card:hover .ph img,.who-stack:hover .ws-card:hover .ph img{transform:scale(1.06);filter:saturate(1.06) brightness(1.03);}
+.ws-hint{position:absolute;left:50%;bottom:-16px;transform:translateX(-50%) translateY(100%);z-index:7;
+  display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);
+  padding:9px 16px;border-radius:999px;font-size:12.5px;font-weight:700;color:var(--purple-700);
+  box-shadow:var(--shadow-soft);white-space:nowrap;pointer-events:none;}
+.ws-hint .dmd{background:var(--red);width:8px;height:8px;}
+/* ---- stat hover ---- */
+.who-stat{position:relative;transition:background .4s var(--ease);}
+.who-stat:hover{background:var(--cream-50);}
+.who-stat .n{transition:transform .45s var(--ease),color .45s var(--ease);}
+.who-stat:hover .n{transform:translateY(-4px);color:var(--purple);}
+.who-stat .l{transition:color .4s var(--ease);}
+.who-stat::after{content:"";position:absolute;bottom:0;right:0;height:2px;width:0;background:var(--red);transition:width .55s var(--ease);}
+.who-stat:hover::after{width:100%;}
+.who-text{max-width:600px;}
+.who-title{margin:14px 0 24px;font-size:clamp(30px,3.5vw,50px);}
+.who-body{margin:0 0 24px;}
+.who-quote{font-weight:800;font-size:clamp(19px,1.8vw,25px);line-height:1.55;color:var(--purple);
+  margin:28px 0;padding-inline-start:20px;border-inline-start:3px solid var(--red);}
+.who-stats{display:grid;grid-template-columns:repeat(3,1fr);margin:32px 0 30px;border-top:1px solid var(--line-2);}
+.who-stat{padding:22px clamp(14px,1.8vw,22px) 2px;}
+.who-stat:first-child{padding-inline-start:0;}
+.who-stat + .who-stat{border-inline-start:1px solid var(--line-2);}
+.who-stat .n{font-family:var(--latin);font-weight:800;font-size:clamp(30px,3vw,44px);line-height:1;color:var(--ink);letter-spacing:-.02em;}
+.who-stat .l{font-size:12.5px;color:var(--ink-3);font-weight:600;margin-top:9px;line-height:1.5;}
+/* slower, layered entrance */
+#who .reveal{transition-duration:1.15s;}
+#who .stagger>*{transition-duration:1s;transition-delay:calc(var(--si,0)*170ms);}
+
+/* ---------- PILLARS ---------- */
+.pillars{background:var(--cream-50);}
+.pillar{display:grid;grid-template-columns:auto 1fr auto;gap:clamp(18px,3vw,44px);align-items:center;
+  padding:clamp(24px,3vw,38px) 0;position:relative;cursor:default;}
+.pillar .rule{position:absolute;top:0;left:0;right:0;}
+.pillar .p-num{font-family:var(--latin);font-weight:800;font-size:clamp(24px,2.4vw,38px);line-height:1;
+  color:transparent;-webkit-text-stroke:1.4px var(--purple-200);transition:all .5s var(--ease);letter-spacing:-.02em;}
+.pillar:hover .p-num{-webkit-text-stroke:1.4px var(--purple);color:var(--purple);}
+.pillar .p-title{font-family:var(--ar);font-weight:800;font-size:clamp(23px,2.6vw,38px);line-height:1.12;color:var(--ink);
+  transition:transform .5s var(--ease);}
+.pillar:hover .p-title{transform:translateX(-8px);}
+.pillar .p-desc{font-size:clamp(14px,1vw,16.5px);line-height:1.7;color:var(--ink-2);max-width:48ch;margin:8px 0 0;}
+.pillar .p-go{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--line-2);display:flex;align-items:center;justify-content:center;
+  color:var(--purple);flex:0 0 auto;transition:all .5s var(--ease);}
+.pillar .p-go svg{width:21px;height:21px;}
+.pillar:hover .p-go{background:var(--purple);border-color:var(--purple);color:#fff;}
+.pillar-mid{min-width:0;display:flex;flex-direction:column;gap:10px;}
+.pillar .p-title{display:block;}
+.pillar .p-desc{display:block;}
+@media(max-width:760px){
+  .pillar{grid-template-columns:auto 1fr;gap:20px;}
+  .pillar .p-go{display:none;}
+}
+
+/* ---------- ECOSYSTEM (logo wall) ---------- */
+.eco{text-align:center;}
+.eco-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(14px,2vw,26px);align-items:center;margin-top:clamp(40px,5vh,60px);}
+.eco-logo{aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;padding:22px;}
+.eco-logo img{max-height:80px;max-width:100%;width:auto;object-fit:contain;
+  filter:grayscale(1);opacity:.55;transition:filter .5s var(--ease),opacity .5s var(--ease),transform .5s var(--ease);}
+.eco-logo:hover img{filter:none;opacity:1;transform:scale(1.05);}
+.eco-logo{will-change:transform,opacity;cursor:pointer;background:none;border:none;position:relative;}
+.eco-logo::after{content:"";position:absolute;left:50%;bottom:8px;transform:translateX(-50%);
+  width:0;height:2px;background:var(--red);transition:width .45s var(--ease);}
+.eco-logo:hover::after{width:34px;}
+
+/* ---- logo modal ---- */
+.lm-overlay{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;
+  padding:24px;background:rgba(13,0,21,0);backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);
+  opacity:0;visibility:hidden;transition:opacity .5s var(--ease),visibility .5s var(--ease),background .5s var(--ease),backdrop-filter .5s var(--ease);}
+.lm-overlay.open{opacity:1;visibility:visible;background:rgba(13,0,21,.55);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);}
+.lm-card{position:relative;width:min(540px,100%);background:#fff;border-radius:20px;overflow:hidden;
+  box-shadow:0 50px 110px -40px rgba(20,4,30,.6);
+  transform:translateY(28px) scale(.96);opacity:0;
+  transition:transform .6s cubic-bezier(0.16,1,0.3,1),opacity .5s var(--ease);}
+.lm-overlay.open .lm-card{transform:none;opacity:1;}
+.lm-top{position:relative;padding:46px 40px 30px;background:var(--cream-50);overflow:hidden;text-align:center;}
+.lm-top .bg-dmd{position:absolute;inset-inline-end:-40px;top:-40px;width:160px;height:160px;border:2px solid rgba(132,0,169,.12);transform:rotate(45deg);}
+.lm-logo{position:relative;height:84px;display:flex;align-items:center;justify-content:center;}
+.lm-logo img{max-height:84px;max-width:80%;width:auto;object-fit:contain;}
+.lm-kind{position:relative;display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-size:12.5px;font-weight:700;color:var(--purple-600);}
+.lm-kind .dmd{width:7px;height:7px;}
+.lm-body{padding:28px 40px 38px;}
+.lm-kind,.lm-link{opacity:0;transform:translateY(16px);
+  transition:opacity .55s var(--ease),transform .55s var(--ease);}
+.lm-card.revealed .lm-kind{transition-delay:.04s;}
+.lm-card.revealed .lm-link{transition-delay:.30s;}
+.lm-card.revealed .lm-kind,.lm-card.revealed .lm-link{opacity:1;transform:none;}
+.lm-card.lm-measuring{transition:none!important;transform:none!important;}
+.lm-clone{position:fixed;z-index:600;margin:0;pointer-events:none;object-fit:contain;transform-origin:center;will-change:transform;backface-visibility:hidden;}
+.lm-type-caret{display:inline-block;width:2px;height:.95em;background:var(--purple);margin-inline-start:3px;vertical-align:-1px;animation:caretBlink .8s steps(1) infinite;}
+@keyframes caretBlink{50%{opacity:0;}}
+.lm-title{min-height:1.2em;} .lm-desc{min-height:1.95em;}
+.lm-title{font-family:var(--ar);font-weight:800;font-size:clamp(24px,3vw,32px);line-height:1.2;margin:0 0 14px;color:var(--ink);}
+.lm-desc{font-size:16px;line-height:1.95;color:var(--ink-2);margin:0 0 26px;text-wrap:pretty;}
+.lm-link{display:inline-flex;align-items:center;gap:11px;font-weight:700;font-size:16px;color:var(--purple-700);transition:gap .35s var(--ease);}
+.lm-link .ic{width:21px;height:21px;transition:transform .35s var(--ease);}
+.lm-link:hover{gap:16px;} .lm-link:hover .ic{transform:translateX(-6px);}
+.lm-close{position:absolute;top:16px;left:16px;width:42px;height:42px;border-radius:50%;z-index:3;
+  background:rgba(255,255,255,.85);border:1px solid var(--line);color:var(--ink);font-size:22px;line-height:1;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .35s var(--ease);}
+.lm-close:hover{background:var(--purple);color:#fff;border-color:var(--purple);transform:rotate(90deg);}
+@media (prefers-reduced-motion:reduce){.lm-card{transition:opacity .3s;transform:none;}
+  .lm-kind,.lm-link{opacity:1!important;transform:none!important;}
+  .lm-type-caret{display:none;}}
+
+/* ---- eco click nudge ---- */
+.eco-hint{display:inline-flex;align-items:center;gap:10px;margin-top:clamp(28px,4vh,44px);
+  font-size:13.5px;font-weight:700;color:var(--purple-700);}
+.eco-hint .tap{width:30px;height:30px;border-radius:50%;background:var(--purple);color:#fff;
+  display:flex;align-items:center;justify-content:center;position:relative;flex:0 0 auto;}
+.eco-hint .tap svg{width:16px;height:16px;}
+.eco-hint .tap::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--purple);
+  animation:tapPulse 1.9s var(--ease) infinite;}
+@keyframes tapPulse{0%{transform:scale(1);opacity:.7;}70%{transform:scale(1.8);opacity:0;}100%{opacity:0;}}
+@media (prefers-reduced-motion:reduce){.eco-hint .tap::before{animation:none;}}
+.pillar-mid,.pillar .p-num,.pillar .p-go{will-change:transform;}
+@media(max-width:900px){.eco-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:520px){.eco-grid{grid-template-columns:repeat(2,1fr);}}
+
+/* ---------- INSTAGRAM ---------- */
+.insta-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:clamp(34px,5vh,52px);}
+.insta-frame{border-radius:12px;overflow:hidden;background:#fff;border:1px solid var(--line);max-width:1080px;margin:0 auto;}
+.insta-frame iframe{display:block;width:100%;min-height:560px;border:0;}
+
+/* ---------- JOIN (floating card) ---------- */
+.join-band{position:relative;background:var(--cream-50);overflow:hidden;}
+.join-band .bg-dmd{position:absolute;inset-inline-end:-60px;top:-60px;width:300px;height:300px;border:2px solid rgba(132,0,169,.1);transform:rotate(45deg);pointer-events:none;}
+.join-band .bg-dmd.two{inset-inline-end:auto;inset-inline-start:6%;top:auto;bottom:-110px;width:200px;height:200px;border-color:rgba(255,0,0,.1);}
+.join-card{position:relative;z-index:1;max-width:860px;margin:0 auto;background:#fff;border:1px solid var(--line);
+  border-radius:22px;padding:clamp(40px,5vw,68px) clamp(28px,5vw,68px);text-align:center;
+  box-shadow:0 44px 100px -56px rgba(20,4,30,.42);}
+.join-card .eyebrow{justify-content:center;color:var(--purple-600);margin-bottom:18px;}
+.join-title{font-family:var(--ar);font-weight:900;font-size:clamp(27px,3.2vw,46px);line-height:1.18;margin:0 0 18px;color:var(--ink);}
+.join-title .cr{color:var(--purple);}
+.join-sub{font-size:clamp(16px,1.25vw,19px);line-height:1.75;color:var(--ink-2);max-width:52ch;margin:0 auto 30px;}
+
+@media(max-width:1000px){.who-grid{grid-template-columns:1fr;gap:44px;}.who-figure img{max-height:520px;}}
+</style>
+</head>
+<body>
+
+<!-- ============ PRELOADER ============ -->
+<div class="preloader" id="preloader">
+  <div class="pl-inner">
+    <img src="assets/logos/zad-logo-black.png" class="pl-logo" alt="زاد الفنون">
+    <div class="pl-diamonds"><span></span><span></span><span></span><span></span></div>
+    <div class="pl-bar"><span class="pl-fill"></span></div>
+  </div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<div class="top-rule"></div>
+<header class="site-header" id="header">
+  <div class="wrap">
+    <a href="index.html" class="brand" data-cursor="الرئيسية"><img src="assets/logos/zad-logo-black.png" alt="زاد الفنون، Zad for Arts"></a>
+    <nav class="nav">
+      <div class="nav-item active"><a href="index.html" class="nav-link">الرئيسية</a></div>
+      <div class="nav-item">
+        <a href="about.html" class="nav-link">عن زاد الفنون <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+        <div class="mega"><div class="mega-inner">
+          <a href="about.html#story" class="mega-link"><span class="mdmd"></span><span class="mt"><b>قصتنا</b><span>من الجمعية الثقافية العربية إلى زاد الفنون</span></span></a>
+          <a href="about.html#founders" class="mega-link"><span class="mdmd"></span><span class="mt"><b>المؤسسون</b><span>الجمعية الثقافية العربية وصندوق سمير عبدالهادي</span></span></a>
+          <a href="about.html#supporters" class="mega-link"><span class="mdmd"></span><span class="mt"><b>الداعمون</b><span>شركاء يؤمنون بأثر الثقافة</span></span></a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <a href="بناء-القدرات.html" class="nav-link">بناء القدرات <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+        <div class="mega"><div class="mega-inner">
+          <a href="بناء-القدرات.html#academy" class="mega-link"><span class="mdmd"></span><span class="mt"><b>أكاديمية زاد للموسيقى</b><span>تدريب وتأهيل الموسيقيين</span></span></a>
+          <a href="بناء-القدرات.html#orchestra" class="mega-link"><span class="mdmd"></span><span class="mt"><b>الأوركسترا المجتمعية العربية</b><span>فضاء يجمع الأجيال والثقافات</span></span></a>
+          <a href="بناء-القدرات.html#ibdaa" class="mega-link"><span class="mdmd"></span><span class="mt"><b>صندوق منح إبداع</b><span>منحٌ تفتح الأبواب للمواهب</span></span></a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <a href="الشراكات-الثقافية.html" class="nav-link">الشراكات الثقافية <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+        <div class="mega"><div class="mega-inner">
+          <a href="الشراكات-الثقافية.html#albalad" class="mega-link"><span class="mdmd"></span><span class="mt"><b>مسرح البلد</b><span>مساحة فنية مستقلة منذ 2005</span></span></a>
+          <a href="الشراكات-الثقافية.html#alshams" class="mega-link"><span class="mdmd"></span><span class="mt"><b>مسرح الشمس</b><span>المسرح الوحيد بنظام الريبرتوار</span></span></a>
+        </div></div>
+      </div>
+    </nav>
+    <div class="actions">
+      <button class="lang" data-lang>EN</button>
+      <a href="انضم-إلى-أصدقائنا.html" class="btn btn-primary header-cta">كن من أصدقائنا</a>
+      <button class="burger" id="burger" aria-label="القائمة"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ MOBILE MENU ============ -->
+<div class="mmenu" id="mmenu">
+  <button class="mm-close" id="mmClose" aria-label="إغلاق">&times;</button>
+  <a href="index.html" class="mm-link"><span class="dmd"></span>الرئيسية</a>
+  <div class="mm-group">
+    <a href="about.html"><span class="dmd"></span>عن زاد الفنون</a>
+    <div class="mm-sub">
+      <a href="about.html#story"><span class="dmd"></span>قصتنا</a>
+      <a href="about.html#founders"><span class="dmd"></span>المؤسسون</a>
+      <a href="about.html#supporters"><span class="dmd"></span>الداعمون</a>
+    </div>
+  </div>
+  <div class="mm-group">
+    <a href="بناء-القدرات.html"><span class="dmd"></span>بناء القدرات</a>
+    <div class="mm-sub">
+      <a href="بناء-القدرات.html#academy"><span class="dmd"></span>أكاديمية زاد للموسيقى</a>
+      <a href="بناء-القدرات.html#orchestra"><span class="dmd"></span>الأوركسترا المجتمعية</a>
+      <a href="بناء-القدرات.html#ibdaa"><span class="dmd"></span>صندوق منح إبداع</a>
+    </div>
+  </div>
+  <div class="mm-group">
+    <a href="الشراكات-الثقافية.html"><span class="dmd"></span>الشراكات الثقافية</a>
+    <div class="mm-sub">
+      <a href="الشراكات-الثقافية.html#albalad"><span class="dmd"></span>مسرح البلد</a>
+      <a href="الشراكات-الثقافية.html#alshams"><span class="dmd"></span>مسرح الشمس</a>
+    </div>
+  </div>
+  <div class="mm-actions">
+    <a href="انضم-إلى-أصدقائنا.html" class="btn btn-primary">كن من أصدقائنا</a>
+    <button class="mm-lang" data-lang>English</button>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <div class="hero-media" data-parallax="0.3">
+    <div class="home-media">
+      <div class="hslide active"><img src="assets/images/home/hero-slide-1.jpg" alt="المدرج الروماني في عمّان أثناء حفل موسيقي"></div>
+      <div class="hslide"><img src="assets/images/home/hero-slide-2.jpg" alt="عرض على المسرح"></div>
+      <div class="hslide"><img src="assets/images/home/hero-slide-3.jpg" alt="عرض رقص معاصر بإضاءة حمراء"></div>
+    </div>
+  </div>
+  <div class="hero-scrim"></div>
+  <span class="hero-deco d-1" data-parallax="0.5"></span>
+  <span class="hero-deco d-2" data-parallax="0.7"></span>
+  <span class="hero-deco d-3" data-parallax="0.65"></span>
+  <div class="hero-content" data-parallax="0.05">
+    <div class="wrap">
+      <div class="eyebrow"><span class="dmd cream"></span><span class="lbl">زاد الفنون · الأردن</span></div>
+      <h1 class="display hero-title split">حيث تجد الفنون الأدائية صوتها</h1>
+      <p class="hero-lead reveal">مبادرة ثقافية غير ربحية تُنمّي المسرح والموسيقى والرقص في الأردن، وتستثمر في الفنانين والمؤسسات الثقافية المستقلة.</p>
+      <div class="hero-ctas reveal">
+        <a href="بناء-القدرات.html" class="btn btn-primary" data-cursor="استكشف">اكتشف برامجنا
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHO WE ARE ============ -->
+<section class="section" id="who">
+  <div class="wrap">
+    <div class="who-grid">
+      <div class="who-figure reveal">
+        <div class="who-stack" id="whoStack">
+          <div class="ws-card" style="--r:6deg;--z:1;--i:4;--sx:40%;--sy:30%;--sr:12deg"><div class="ph"><img src="assets/images/cultural-partnerships/hero-partnerships.jpg" alt="عرض ثقافي"></div></div>
+          <div class="ws-card" style="--r:-5deg;--z:2;--i:3;--sx:-38%;--sy:28%;--sr:-9deg"><div class="ph"><img src="assets/images/about/hero-about.jpg" alt="من زاد الفنون"></div></div>
+          <div class="ws-card" style="--r:4deg;--z:3;--i:2;--sx:42%;--sy:-24%;--sr:11deg"><div class="ph"><img src="assets/images/home/hero-slide-3.jpg" alt="رقص معاصر"></div></div>
+          <div class="ws-card" style="--r:-3deg;--z:4;--i:1;--sx:-40%;--sy:-26%;--sr:-12deg"><div class="ph"><img src="assets/images/home/hero-slide-1.jpg" alt="المدرج الروماني"></div></div>
+          <div class="ws-card" style="--r:1deg;--z:5;--i:0;--sx:0%;--sy:0%;--sr:3deg"><div class="ph"><img src="assets/images/home/who-we-are.jpg" alt="عرض أدائي، زاد الفنون"></div></div>
+          <span class="ws-hint"><span class="dmd"></span> مرّر لنثر الصور</span>
+        </div>
+        <span class="tag"><span class="dmd"></span> منذ 2023</span>
+      </div>
+      <div class="who-text">
+        <div class="eyebrow"><span class="dmd"></span><span class="lbl">من نحن</span></div>
+        <h2 class="h-sec who-title split">نُغذّي الناس والأفكار والخشبات</h2>
+        <p class="body who-body reveal">زاد الفنون مبادرة ثقافية غير ربحية أُطلقت عام 2023، تمثّل المسار الثقافي للجمعية الثقافية العربية وصندوق سمير عبدالهادي للثقافة والفنون، وتعمل على ترسيخ الفنون الأدائية كعنصر حيّ في نسيج الحياة المجتمعية.</p>
+        <p class="who-quote reveal">نستثمر في الأثر والإرث الثقافي لبناء جيل المستقبل.</p>
+        <div class="who-stats stagger">
+          <div class="who-stat"><div class="n"><span data-count="2023" data-dur="1600">2023</span></div><div class="l">عام انطلاق زاد الفنون</div></div>
+          <div class="who-stat"><div class="n"><span data-count="3">3</span></div><div class="l">منصّات: مسرح · موسيقى · رقص</div></div>
+          <div class="who-stat"><div class="n"><span data-count="1967">1967</span></div><div class="l">جذور الجمعية الثقافية العربية</div></div>
+        </div>
+        <a href="about.html" class="arrow-link reveal">تعرّف على قصتنا
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ECOSYSTEM ============ -->
+<section class="section eco" id="eco">
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center"><span class="dmd"></span><span class="lbl">منظومة من البرامج والشركاء</span><span class="dmd"></span></div>
+    <h2 class="h-sub split" style="margin-top:16px">نعمل معاً من أجل مشهد ثقافي نابض</h2>
+    <div class="eco-grid" id="ecoGrid">
+      <button class="eco-logo" data-kind="برنامج" data-title="أكاديمية زاد للموسيقى" data-link="بناء-القدرات.html#academy" data-desc="بيئة تعليمية تصقل المواهب الموسيقية من الأساسيات حتى الاحتراف، وتفتح أمام العازفين الشباب طريقاً نحو الخشبة."><img src="assets/logos/clean/zad-music-academy.png" alt="أكاديمية زاد للموسيقى"></button>
+      <button class="eco-logo" data-kind="برنامج" data-title="الأوركسترا المجتمعية العربية" data-link="بناء-القدرات.html#orchestra" data-desc="فضاء موسيقي يجمع الأجيال والثقافات على منصة واحدة، لتصنع من العزف الجماعي تجربة مجتمعية جامعة."><img src="assets/logos/clean/arab-community-orchestra.png" alt="الأوركسترا المجتمعية العربية"></button>
+      <button class="eco-logo" data-kind="صندوق منح" data-title="صندوق منح إبداع" data-link="بناء-القدرات.html#ibdaa" data-desc="منح تفتح الأبواب أمام المواهب الواعدة، وتدعم الفنانين لتحويل أفكارهم إلى أعمال حية على أرض الواقع."><img src="assets/logos/clean/ibdaa-fund.png" alt="صندوق منح إبداع"></button>
+      <button class="eco-logo" data-kind="شريك ثقافي" data-title="مسرح البلد" data-link="الشراكات-الثقافية.html#albalad" data-desc="مساحة فنية مستقلة في قلب عمّان منذ 2005، احتضنت المسرح والموسيقى والسينما وصارت منبراً للأصوات الثقافية الحرة."><img src="assets/logos/clean/albalad-theatre.png" alt="مسرح البلد"></button>
+      <button class="eco-logo" data-kind="شريك ثقافي" data-title="مسرح الشمس" data-link="الشراكات-الثقافية.html#alshams" data-desc="المسرح الوحيد في الأردن الذي يعمل بنظام الريبرتوار، يقدم عروضاً متجددة ويرسّخ المسرح حرفةً وممارسة مستمرة."><img src="assets/logos/clean/alshams-theatre.png" alt="مسرح الشمس"></button>
+      <button class="eco-logo" data-kind="مؤسس" data-title="الجمعية الثقافية العربية" data-link="about.html#founders" data-desc="مؤسسة ثقافية عريقة تمتد جذورها إلى عام 1967، ومنها انبثق المسار الثقافي الذي أثمر عن زاد الفنون."><img src="assets/logos/clean/arab-cultural-society.png" alt="الجمعية الثقافية العربية"></button>
+    </div>
+    <p class="eco-hint"><span class="tap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V6a2 2 0 0 1 4 0v5"></path><path d="M13 7a2 2 0 0 1 4 0v6"></path><path d="M17 9a2 2 0 0 1 4 0v6a6 6 0 0 1-6 6h-2a7 7 0 0 1-6-4l-2-4a2 2 0 0 1 3.4-2.1L13 13"></path></svg></span> اضغط على أي شعار لتعرف قصته</p>
+  </div>
+</section>
+
+<!-- ============ INSTAGRAM ============ -->
+<section class="section" id="instagram" style="padding-top:0">
+  <div class="wrap">
+    <div class="insta-head">
+      <div>
+        <div class="eyebrow"><span class="dmd red"></span><span class="lbl">تابعنا</span></div>
+        <h2 class="h-sub split" style="margin-top:14px">من خلف الكواليس وعلى الخشبة</h2>
+      </div>
+      <a href="https://www.instagram.com/zadforarts" target="_blank" rel="noopener" class="arrow-link">@zadforarts
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a>
+    </div>
+    <div class="insta-frame reveal">
+      <iframe src="https://cdn.lightwidget.com/widgets/0eb3b5091b065bc1ad1f2cda8661a3d9.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" title="انستغرام زاد الفنون"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ============ JOIN (floating card) ============ -->
+<section class="section join-band" id="join" style="padding-block:clamp(64px,9vh,120px)">
+  <span class="bg-dmd"></span><span class="bg-dmd two"></span>
+  <div class="wrap">
+    <div class="join-card reveal">
+      <div class="eyebrow"><span class="dmd"></span><span class="lbl">كن جزءاً من الحكاية</span></div>
+      <h2 class="join-title split">دعمك يُبقي الأضواء مشتعلة <span class="cr">والستارة ترتفع</span></h2>
+      <p class="join-sub reveal">انضم إلى أصدقاء زاد الفنون وساهم في بناء القدرات، ودعم شركائنا الثقافيين، والعمل من أجل فنون أدائية تنبض بالحياة في الأردن.</p>
+      <a href="انضم-إلى-أصدقائنا.html" class="btn btn-primary reveal" data-cursor="انضم">كن من أصدقائنا
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOGO MODAL ============ -->
+<div class="lm-overlay" id="logoModal" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="lm-card">
+    <button class="lm-close" id="lmClose" aria-label="إغلاق">&times;</button>
+    <div class="lm-top">
+      <span class="bg-dmd"></span>
+      <div class="lm-logo"><img id="lmImg" src="" alt=""></div>
+      <span class="lm-kind"><span class="dmd"></span><span id="lmKind"></span></span>
+    </div>
+    <div class="lm-body">
+      <h3 class="lm-title" id="lmTitle"></h3>
+      <p class="lm-desc" id="lmDesc"></p>
+      <a class="lm-link" id="lmLink" href="#">اعرف المزيد
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/logos/zad-logo-white.png" alt="زاد الفنون">
+        <p>مبادرة ثقافية غير ربحية تدعم الفنون الأدائية في الأردن، المسرح والموسيقى والرقص، وتستثمر في الفنانين والمؤسسات الثقافية المستقلة.</p>
+      </div>
+      <div class="foot-col">
+        <h4>استكشف</h4>
+        <a href="about.html"><span class="dmd"></span>عن زاد الفنون</a>
+        <a href="بناء-القدرات.html"><span class="dmd"></span>بناء القدرات</a>
+        <a href="الشراكات-الثقافية.html"><span class="dmd"></span>الشراكات الثقافية</a>
+        <a href="انضم-إلى-أصدقائنا.html"><span class="dmd"></span>انضم إلى أصدقائنا</a>
+      </div>
+      <div class="foot-col">
+        <h4>تواصل معنا</h4>
+        <a href="/cdn-cgi/l/email-protection#99f0f7fff6d9e3f8fdfff6ebf8ebedeab7faf6f4"><span class="dmd"></span><span class="__cf_email__" data-cfemail="5b32353d341b213a3f3d34293a292f2875383436">[email&#160;protected]</span></a>
+        <a href="tel:+96265623772"><span class="dmd"></span><span class="lat" dir="ltr">+962 6 562 3772</span></a>
+        <a href="#"><span class="dmd"></span>عمّان، الأردن</a>
+        <div class="foot-social">
+          <a href="https://www.instagram.com/zadforarts" target="_blank" rel="noopener" aria-label="انستغرام"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a>
+          <a href="#" aria-label="فيسبوك"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+          <a href="#" aria-label="يوتيوب"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"></polygon></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span class="strip"><span class="dmd"></span> © <span class="lat">2026</span> زاد الفنون · جميع الحقوق محفوظة</span>
+      <div class="fb-actions">
+        <span>المسار الثقافي للجمعية الثقافية العربية وصندوق سمير عبدالهادي</span>
+        <button class="to-top" data-to-top aria-label="العودة للأعلى"><span class="tt-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg></span></button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
+<script src="site.js"></script>
+<script>
+/* home hero crossfade (Ken Burns) */
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.hslide'));
+  if(slides.length<2) return;
+  var i=0;
+  setInterval(function(){
+    slides[i].classList.remove('active');
+    i=(i+1)%slides.length;
+    slides[i].classList.add('active');
+  },5200);
+})();
+</script>
+<script>
+/* ecosystem logos: enter → seen stacked on the right → hold 0.5s → smooth horizontal push */
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  var eco = document.getElementById('eco');
+  var logos = [].slice.call(document.querySelectorAll('#ecoGrid .eco-logo'));
+  if(!eco || !logos.length) return;
+
+  var offsets = [];               /* px each logo must travel to stack onto the rightmost one */
+  function measure(){
+    var ax = logos[0].offsetLeft + logos[0].offsetWidth/2;
+    offsets = logos.map(function(l){ return ax - (l.offsetLeft + l.offsetWidth/2); });
+  }
+  var spread = false;
+  function stack(){
+    logos.forEach(function(l,i){
+      l.style.transition = 'none';
+      l.style.transformOrigin = 'center';
+      l.style.transform = 'translateX('+offsets[i]+'px) translateY('+(i*-4)+'px) rotate('+((i%2?-1:1)*4)+'deg) scale(0.98)';
+      l.style.opacity = '1';
+      l.style.zIndex = String(logos.length - i);   /* rightmost on top of the pile */
+    });
+  }
+  function fanOut(){
+    spread = true;
+    logos.forEach(function(l,i){
+      /* smooth, staggered push into the row */
+      l.style.transition = 'transform 1s cubic-bezier(0.16,1,0.3,1) '+(i*0.07).toFixed(2)+'s';
+      l.style.transform = 'translateX(0) translateY(0) rotate(0deg) scale(1)';
+    });
+  }
+  measure(); stack();
+
+  var pending = null;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){
+        if(!spread){ clearTimeout(pending); pending = setTimeout(fanOut, 500); }   /* hold, then push */
+      } else {
+        clearTimeout(pending); spread = false; stack();                          /* reset so it replays next time */
+      }
+    });
+  }, {threshold:0.4});
+  io.observe(eco);
+
+  window.addEventListener('resize', function(){
+    measure();
+    if(spread){ logos.forEach(function(l){ l.style.transition='none'; l.style.transform='translateX(0) translateY(0) rotate(0deg) scale(1)'; }); }
+    else stack();
+  }, {passive:true});
+})();
+</script>
+<script>
+/* who-we-are: photo stack ⇄ scattered polaroid gallery on click */
+(function(){
+  var stack = document.getElementById('whoStack');
+  if(!stack) return;
+  stack.addEventListener('click', function(){ stack.classList.toggle('spread'); });
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(!e.isIntersecting) stack.classList.remove('spread'); });
+    }, {threshold:0.02}).observe(stack);
+  }
+})();
+</script>
+<script>
+/* logo synopsis modal */
+(function(){
+  var modal = document.getElementById('logoModal');
+  if(!modal) return;
+  var img=document.getElementById('lmImg'), kind=document.getElementById('lmKind'),
+      title=document.getElementById('lmTitle'), desc=document.getElementById('lmDesc'),
+      link=document.getElementById('lmLink'), close=document.getElementById('lmClose');
+  var lmImg=img, card=modal.querySelector('.lm-card');
+  var REDUCE = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var typeToken=0;
+  function typeWriter(el, text, speed){
+    return new Promise(function(res){
+      var my=++typeToken; el.textContent='';
+      var caret=document.createElement('span'); caret.className='lm-type-caret'; el.appendChild(caret);
+      var i=0;
+      (function tick(){
+        if(my!==typeToken){ return; }
+        if(i<text.length){ caret.insertAdjacentText('beforebegin', text.charAt(i)); i++; setTimeout(tick, speed); }
+        else { res(caret); }
+      })();
+    });
+  }
+  function open(btn){
+    var srcImg=btn.querySelector('img');
+    var tText=btn.getAttribute('data-title')||'', dText=btn.getAttribute('data-desc')||'';
+    img.src=srcImg.getAttribute('src'); img.alt=srcImg.getAttribute('alt');
+    kind.textContent=btn.getAttribute('data-kind')||'';
+    link.setAttribute('href', btn.getAttribute('data-link')||'#');
+
+    if(REDUCE){
+      title.textContent=tText; desc.textContent=dText;
+      modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
+      card.classList.add('revealed'); document.body.style.overflow='hidden'; return;
+    }
+    title.textContent=''; desc.textContent='';
+
+    var s=srcImg.getBoundingClientRect();
+    card.classList.add('lm-measuring');
+    var t=lmImg.getBoundingClientRect();
+    card.classList.remove('lm-measuring');
+
+    var clone=srcImg.cloneNode(true);
+    clone.className='lm-clone';
+    clone.style.left=s.left+'px'; clone.style.top=s.top+'px';
+    clone.style.width=s.width+'px'; clone.style.height=s.height+'px';
+    clone.style.transform='translate(0,0) scale(1)';
+    /* shadow set ONCE and kept constant — only transform animates (stays on the compositor) */
+    clone.style.filter='grayscale(0) drop-shadow(0 22px 44px rgba(20,4,30,.34))';
+    document.body.appendChild(clone);
+
+    lmImg.style.opacity='0';
+    modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
+    card.classList.remove('revealed');
+    document.body.style.overflow='hidden';
+
+    var tx=(t.left + t.width/2) - (s.left + s.width/2);
+    var ty=(t.top + t.height/2) - (s.top + s.height/2);
+    var sc=t.width/s.width;
+    var done=false;
+    function land(){
+      if(done) return; done=true;
+      lmImg.style.opacity='1';
+      if(clone.parentNode) clone.parentNode.removeChild(clone);
+      card.classList.add('revealed');
+      typeWriter(title, tText, 34).then(function(c){ if(c&&c.parentNode) c.parentNode.removeChild(c);
+        return typeWriter(desc, dText, 10); }).then(function(c){ if(c&&c.parentNode) c.parentNode.removeChild(c); });
+    }
+    /* one continuous motion: lift toward viewer → glide to centre slot */
+    function flight(){
+      var keyframes=[
+        { transform:'translate(0,0) scale(1)' },
+        { transform:'translate('+(tx*0.10).toFixed(1)+'px,'+(ty*0.10).toFixed(1)+'px) scale(1.16)', offset:0.36, easing:'cubic-bezier(0.34,1.1,0.5,1)' },
+        { transform:'translate('+tx.toFixed(1)+'px,'+ty.toFixed(1)+'px) scale('+sc.toFixed(4)+')' }
+      ];
+      if(clone.animate){
+        var a=clone.animate(keyframes,{duration:1000,easing:'cubic-bezier(0.5,0,0.16,1)',fill:'forwards'});
+        a.onfinish=land;
+      } else {
+        clone.style.transition='transform 1s cubic-bezier(0.16,1,0.3,1)';
+        clone.style.transform='translate('+tx+'px,'+ty+'px) scale('+sc+')';
+        clone.addEventListener('transitionend', function(e){ if(e.propertyName==='transform') land(); });
+      }
+      setTimeout(land, 1450);
+    }
+    void clone.offsetWidth;   /* commit start transform, then fly (no rAF dependency) */
+    flight();
+  }
+  function shut(){ typeToken++; modal.classList.remove('open'); modal.setAttribute('aria-hidden','true');
+    card.classList.remove('revealed'); lmImg.style.opacity=''; document.body.style.overflow=''; }
+  [].forEach.call(document.querySelectorAll('#ecoGrid .eco-logo'), function(b){
+    b.addEventListener('click', function(e){ e.stopPropagation(); open(b); });
+  });
+  close.addEventListener('click', shut);
+  modal.addEventListener('click', function(e){ if(e.target===modal) shut(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && modal.classList.contains('open')) shut(); });
+})();
+</script>
+</body>
+</html>
